@@ -84,7 +84,8 @@ def extract_attributes(node):
         elif attr.name == "ceil_mode":
             kwargs["ceil_mode"] = bool(extract_attr_values(attr))
         elif attr.name == "value":
-            kwargs["constant"] = extract_attr_values(attr)
+            if node.op_type != 'Pad':
+                kwargs["constant"] = extract_attr_values(attr)
         elif attr.name == "perm":
             kwargs["dims"] = extract_attr_values(attr)
         elif attr.name == "split":
